@@ -1,0 +1,23 @@
+#!/bin/bash
+LIST_FILE=/usr/local/etc/installed_application.list
+
+if [ "$#" -ne 1 ]; then
+    echo "Illegal number of parameters"
+    exit 1
+fi
+
+#if [ "$EUID" -ne 0 ]
+#  then echo "Please run as root"
+#  exit 1
+#fi
+
+if grep -q $1 $LIST_FILE; then
+    echo "Already installed"
+    exit 1
+fi
+
+
+echo "Installing $1"
+sudo apt install $1 || (echo "failed" && exit 1)
+sudo echo "$1" >> $LIST_FILE
+echo "$1 added to $LIST_FILE"

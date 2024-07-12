@@ -1,0 +1,4 @@
+#!/bin/bash
+spotifyd --no-daemon --verbose > ~/.spotifyd.log &
+spt
+pkill spotifyd
